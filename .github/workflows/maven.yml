@@ -27,8 +27,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Run the Maven verify phase
       run: mvn --batch-mode --update-snapshots verify  
-      #run: mvn -B clean test
+      
     - uses: browser-actions/setup-chrome@latest
-    - run: chrome --version
+      run: chrome --version
