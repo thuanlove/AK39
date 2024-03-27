@@ -1,17 +1,17 @@
 package saleforce;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.List;
-import java.util.Random;
+import java.io.File;
+import java.io.IOException;
 
 public class SaleforceBase {
     protected static  WebDriver driver;
@@ -85,6 +85,24 @@ public class SaleforceBase {
         WebElement login = driver.findElement(By.id("Login"));
         login.click();
         Thread.sleep(10000);
+    }
+
+    @AfterMethod
+    protected void captureScreenWhenFail(ITestResult iTestResult)
+    {
+        if(!iTestResult.isSuccess()){
+            String name = iTestResult.getMethod().getMethodName();
+            File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File DestFile = new File("./target/screenshot/"
+                    + name
+                    + "-"
+                    + System.currentTimeMillis() + ".png");
+            try {
+                FileUtils.copyFile(file, DestFile);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
     @AfterTest
     public void closedDriver(){
