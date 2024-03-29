@@ -1,0 +1,8 @@
+<suite name="calculator">
+    <test name="metric unit on chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="specs.calculator.BMITest"/>
+        </classes>
+    </test>
+</suite>
