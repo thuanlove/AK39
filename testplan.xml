@@ -1,0 +1,8 @@
+<suite name="smoke test">
+    <test name="chrome">
+        <classes>
+            <class name="specs.hooks.TestSuite1"/>
+            <class name="specs.hooks.TestSuite2"/>
+        </classes>
+    </test>
+</suite>
