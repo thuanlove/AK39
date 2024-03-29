@@ -5,8 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.HasDevTools;
-import org.openqa.selenium.devtools.v117.emulation.Emulation;
-import org.openqa.selenium.devtools.v117.network.Network;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -67,10 +65,6 @@ public class ChromeTest {
         WebDriver driver = new ChromeDriver();
         DevTools devTools = ((HasDevTools) driver).getDevTools();
         devTools.createSession();
-        devTools.send(Emulation.setGeolocationOverride(Optional.of(37.386052),
-                Optional.of(-122.083851),
-                Optional.of(1)));
-
         driver.get("https://oldnavy.gap.com/stores");
     }
     @Test
@@ -79,23 +73,6 @@ public class ChromeTest {
         DevTools devTool = ((HasDevTools) driver).getDevTools();
 
         devTool.createSession();
-        devTool.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
-
-        devTool.addListener(Network.requestWillBeSent(), requestSent -> {
-            System.out.println("Request URL => " + requestSent.getRequest().getUrl());
-            System.out.println("Request Method => " + requestSent.getRequest().getMethod());
-            System.out.println("Request Headers => " + requestSent.getRequest().getHeaders().toString());
-            System.out.println("------------------------------------------------------");
-        });
-
-        devTool.addListener(Network.responseReceived(), responseReceived -> {
-            System.out.println("Response Url => " + responseReceived.getResponse().getUrl());
-            System.out.println("Response Status => " + responseReceived.getResponse().getStatus());
-            System.out.println("Response Headers => " + responseReceived.getResponse().getHeaders().toString());
-            System.out.println("Response MIME Type => " + responseReceived.getResponse().getMimeType().toString());
-            System.out.println("------------------------------------------------------");
-        });
-
         driver.get("https://selenium.dev");
     }
 
