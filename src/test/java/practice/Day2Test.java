@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -24,6 +25,15 @@ public class Day2Test {
         String fields = "Card Code,Card Owner,Card ID,Status,Account Name,Card Type," +
                 "Contact Name,Customer Code,Source,Created By,Last Modified By";
         WebDriver driver;
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
+        options.addArguments("--headless");
+        options.setExperimentalOption("useAutomationExtension", false);
+        options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("disable-infobars"); // disabling infobars
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
