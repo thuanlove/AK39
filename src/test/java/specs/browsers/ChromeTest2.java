@@ -20,14 +20,14 @@ public class ChromeTest2 {
         //options.AddArgument("--log-level=3");
         // set chrome as Headless
         //options.setHeadless(true);
-        options.addArguments("--no-sandbox"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
+        //options.addArguments("--no-sandbox"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
         options.addArguments("--headless=new");
-        options.setExperimentalOption("useAutomationExtension", false);
-        options.addArguments("start-maximized"); // open Browser in maximized mode
-        options.addArguments("disable-infobars"); // disabling infobars
-        options.addArguments("--disable-extensions"); // disabling extensions
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        //options.setExperimentalOption("useAutomationExtension", false);
+        //options.addArguments("start-maximized"); // open Browser in maximized mode
+        //options.addArguments("disable-infobars"); // disabling infobars
+        //options.addArguments("--disable-extensions"); // disabling extensions
+        //options.addArguments("--disable-gpu"); // applicable to windows os only
+        //options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
         WebDriver driver = new ChromeDriver(options);
         driver.get("https://selenium.dev");
         Assert.assertEquals(driver.getTitle(),"Selenium");
